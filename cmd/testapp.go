@@ -25,8 +25,10 @@ func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func main() {
 	log.Println("Read config")
-	var cfg map[string]string = map[string]string{"port": "8080"} // Обьявлем и иницилизируем переменную с дефолтным портом.
-	cleanenv.ReadConfig("config.yaml", &cfg)                      // Если есть файл с конфигом берем значение порта оттуда.
+	var cfg map[string]string = map[string]string{"port": "8080"}    // Обьявлем и иницилизируем переменную с дефолтным портом.
+	if err := cleanenv.ReadConfig("config.yaml", &cfg); err != nil { // Если есть файл с конфигом берем значение порта оттуда.
+		log.Println("Config file not found.")
+	}
 
 	for _, e := range os.Environ() {
 		pair := strings.SplitN(e, "=", 2)

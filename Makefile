@@ -20,8 +20,6 @@ dep: ## Download the dependencies.
 build: dep ## Build pgcenter executable.
 	mkdir -p ./bin
 	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o bin/${PROGRAM_NAME} ./cmd
-	# CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o bin/${PROGRAM_NAME} ./cmd
-
 
 clean: ## Clean build directory.
 	rm -f ./bin/${PROGRAM_NAME}
